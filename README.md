@@ -1,6 +1,72 @@
 # Safefy MCP
 
-Servidor MCP para integrar e operar a `safefy-api-payment` via tools do Model Context Protocol.
+MCP server oficial da [Safefy](https://safefypay.com.br) — integre cobranças PIX, saques, clientes e pagamentos diretamente em qualquer agente de IA compatível com Model Context Protocol.
+
+## Como usar no seu agente de IA
+
+### Claude (claude.ai)
+
+Configure via `claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "safefy": {
+      "command": "npx",
+      "args": ["-y", "@safefypay/safefy-mcp"]
+    }
+  }
+}
+```
+
+### v0 (v0.dev)
+
+No chat do v0, clique em **"+"** → **"Add MCP Server"** e configure:
+
+```json
+{
+  "name": "safefy",
+  "command": "npx",
+  "args": ["-y", "@safefypay/safefy-mcp"]
+}
+```
+
+### Lovable (lovable.dev)
+
+Acesse **Settings → MCP Servers → Add Server** e cole:
+
+```json
+{
+  "name": "safefy",
+  "command": "npx",
+  "args": ["-y", "@safefypay/safefy-mcp"]
+}
+```
+
+### Cursor / Windsurf / VS Code
+
+Adicione ao seu `mcp.json` ou `settings.json`:
+
+```json
+{
+  "mcpServers": {
+    "safefy": {
+      "command": "npx",
+      "args": ["-y", "@safefypay/safefy-mcp"]
+    }
+  }
+}
+```
+
+---
+
+Após adicionar o servidor, peça ao agente para configurar suas credenciais:
+
+> "Configure minhas credenciais Safefy: public key `pk_...`, secret key `sk_...`"
+
+Gere suas credenciais em: **https://app.safefypay.com.br/panel/merchant/api-credentials**
+
+---
 
 ## O que este servidor expõe
 
@@ -19,36 +85,17 @@ Servidor MCP para integrar e operar a `safefy-api-payment` via tools do Model Co
 
 ## Requisitos
 
-- Node.js 20+
+- Node.js 18+
 - Credenciais de API Payment (`Public Key` e `Secret Key`)
-- Gerar credenciais no painel: `https://app.safefypay.com.br/panel/merchant/api-credentials`
+- Gere no painel: **https://app.safefypay.com.br/panel/merchant/api-credentials**
 
-## Instalação
+## Instalação local (desenvolvimento)
 
 ```bash
 npm install
-```
-
-## Desenvolvimento
-
-```bash
-npm run check
 npm run build
 npm start
 ```
-
-## Variáveis de ambiente (opcional)
-
-Se definir as variáveis abaixo, o servidor inicia já pré-configurado:
-
-- `SAFEFY_PAYMENT_BASE_URL`
-- `SAFEFY_PAYMENT_PUBLIC_KEY`
-- `SAFEFY_PAYMENT_SECRET_KEY`
-- `SAFEFY_PAYMENT_ENVIRONMENT` (`sandbox` ou `production`)
-
-Você também pode configurar tudo em runtime usando a tool `safefy_payment_configure_credentials`.
-
-Sem configuração prévia, o MCP usa `https://api-payment.safefypay.com.br` como `baseUrl` padrão e solicita configuração de credenciais na primeira operação autenticada.
 
 ## Principais tools
 
