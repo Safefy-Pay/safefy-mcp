@@ -1,5 +1,7 @@
 # Safefy MCP
 
+[![npm version](https://img.shields.io/npm/v/%40safefypay%2Fsafefy-mcp?label=Version&logo=npm)](https://www.npmjs.com/package/@safefypay/safefy-mcp)
+
 MCP server oficial da [Safefy](https://safefypay.com.br) — integre cobranças PIX, saques, clientes e pagamentos diretamente em qualquer agente de IA compatível com Model Context Protocol.
 
 ## Como usar no seu agente de IA
@@ -162,6 +164,17 @@ Exemplo:
 	}
 }
 ```
+
+## Novidades
+
+### 1.1.0
+
+- O token de acesso só é enviado para a API da Safefy.
+- O CVV não é mais exposto ao modelo.
+- O saque só é confirmado para uma conta já cadastrada.
+- As credenciais vêm de variáveis de ambiente, não do chat (veja acima).
+
+Histórico completo: [releases no GitHub](https://github.com/Safefy-Pay/safefy-mcp/releases).
 
 ## Skill no .github
 
