@@ -1,6 +1,7 @@
 # Safefy MCP
 
 [![npm version](https://img.shields.io/npm/v/%40safefypay%2Fsafefy-mcp?label=Version&logo=npm)](https://www.npmjs.com/package/@safefypay/safefy-mcp)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/Safefy-Pay/safefy-mcp/ci.yml?branch=main&label=Build%20Status&logo=github)](https://github.com/Safefy-Pay/safefy-mcp/actions)
 
 MCP server oficial da [Safefy](https://safefypay.com.br) — integre cobranças PIX, saques, clientes e pagamentos diretamente em qualquer agente de IA compatível com Model Context Protocol.
 
