@@ -208,8 +208,19 @@ export class SafefyPaymentApiClient {
   }
 
   private buildUrl(path: string, query?: Record<string, string | number | boolean | undefined | null>): string {
-    const normalizedPath = path.startsWith("/") ? path : `/${path}`;
-    const url = new URL(normalizedPath, this.credentials?.baseUrl || DEFAULT_BASE_URL);
+    const normalizedPath = path.trim().startsWith("/") ? path.trim() : `/${path.trim()}`;
+
+    // MC-01 (auditoria): o token do seller só vai para a API da Safefy. "//outro-site", "\\", esquemas
+    // e caminhos fora de /v1/ são recusados, e o host final é conferido antes de enviar.
+    if (!normalizedPath.startsWith("/v1/") || normalizedPath.includes("//") || /[\\\u0000-\u001f]/.test(normalizedPath)) {
+      throw new SafefyApiError("Rota invalida: use um caminho da API que comece com /v1/.", 400);
+    }
+
+    const base = new URL(this.credentials?.baseUrl || DEFAULT_BASE_URL);
+    const url = new URL(normalizedPath, base);
+    if (url.origin !== base.origin) {
+      throw new SafefyApiError("Rota invalida: a chamada precisa ficar no host da API da Safefy.", 400);
+    }
 
     if (!query) {
       return url.toString();
