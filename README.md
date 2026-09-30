@@ -13,7 +13,11 @@ Configure via `claude_desktop_config.json`:
   "mcpServers": {
     "safefy": {
       "command": "npx",
-      "args": ["-y", "@safefypay/safefy-mcp"]
+      "args": ["-y", "@safefypay/safefy-mcp"],
+      "env": {
+        "SAFEFY_PAYMENT_PUBLIC_KEY": "pk_...",
+        "SAFEFY_PAYMENT_SECRET_KEY": "sk_..."
+      }
     }
   }
 }
@@ -27,7 +31,11 @@ No chat do v0, clique em **"+"** → **"Add MCP Server"** e configure:
 {
   "name": "safefy",
   "command": "npx",
-  "args": ["-y", "@safefypay/safefy-mcp"]
+  "args": ["-y", "@safefypay/safefy-mcp"],
+  "env": {
+    "SAFEFY_PAYMENT_PUBLIC_KEY": "pk_...",
+    "SAFEFY_PAYMENT_SECRET_KEY": "sk_..."
+  }
 }
 ```
 
@@ -39,7 +47,11 @@ Acesse **Settings → MCP Servers → Add Server** e cole:
 {
   "name": "safefy",
   "command": "npx",
-  "args": ["-y", "@safefypay/safefy-mcp"]
+  "args": ["-y", "@safefypay/safefy-mcp"],
+  "env": {
+    "SAFEFY_PAYMENT_PUBLIC_KEY": "pk_...",
+    "SAFEFY_PAYMENT_SECRET_KEY": "sk_..."
+  }
 }
 ```
 
@@ -52,7 +64,11 @@ Adicione ao seu `mcp.json` ou `settings.json`:
   "mcpServers": {
     "safefy": {
       "command": "npx",
-      "args": ["-y", "@safefypay/safefy-mcp"]
+      "args": ["-y", "@safefypay/safefy-mcp"],
+      "env": {
+        "SAFEFY_PAYMENT_PUBLIC_KEY": "pk_...",
+        "SAFEFY_PAYMENT_SECRET_KEY": "sk_..."
+      }
     }
   }
 }
@@ -60,9 +76,9 @@ Adicione ao seu `mcp.json` ou `settings.json`:
 
 ---
 
-Após adicionar o servidor, peça ao agente para configurar suas credenciais:
+As credenciais ficam nas variáveis de ambiente do servidor MCP (`SAFEFY_PAYMENT_PUBLIC_KEY` e `SAFEFY_PAYMENT_SECRET_KEY`), como nos exemplos acima. **Não cole a secret key no chat:** o histórico da conversa não é lugar de segredo, e a tool `safefy_payment_configure_credentials` vem desligada por padrão (só funciona se quem roda o servidor definir `SAFEFY_ALLOW_CHAT_CREDENTIALS=true`).
 
-> "Configure minhas credenciais Safefy: public key `pk_...`, secret key `sk_...`"
+Opcional: `SAFEFY_PAYMENT_ENVIRONMENT` (`sandbox` ou `production`) e `SAFEFY_PAYMENT_BASE_URL`.
 
 Gere suas credenciais em: **https://app.safefypay.com.br/panel/merchant/api-credentials**
 

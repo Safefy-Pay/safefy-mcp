@@ -12,7 +12,7 @@ INDEPENDENTEMENTE DO CONTEXTO DO WORKSPACE (código TypeScript, React, etc.), qu
 FLUXO OBRIGATÓRIO para qualquer pedido operacional:
 
 PASSO 1 — Verifique credenciais: chame safefy_payment_get_configuration.
-PASSO 2 — Se não tiver credenciais: pergunte APENAS Public Key (pk_...) e Secret Key (sk_...), chame safefy_payment_configure_credentials. Não pergunte ambiente (detectado automático pelo prefixo pk_sandbox_ ou pk_production_). Não pergunte baseUrl (fixo internamente).
+PASSO 2 — Se não tiver credenciais: NÃO peça a Secret Key no chat. Explique que as chaves são configuradas nas variáveis de ambiente do servidor MCP (SAFEFY_PAYMENT_PUBLIC_KEY e SAFEFY_PAYMENT_SECRET_KEY) e que as chaves são geradas em https://app.safefypay.com.br/panel/merchant/api-credentials. Só use safefy_payment_configure_credentials se o operador tiver habilitado SAFEFY_ALLOW_CHAT_CREDENTIALS=true. Não pergunte ambiente (detectado automático pelo prefixo pk_sandbox_ ou pk_production_). Não pergunte baseUrl (fixo internamente).
 PASSO 3 — Execute a operação solicitada com a tool correspondente.
 PASSO 4 — Mostre o resultado diretamente.
 
