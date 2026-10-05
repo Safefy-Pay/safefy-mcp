@@ -254,7 +254,8 @@ export function registerTools(server: McpServer, apiClient: SafefyPaymentApiClie
     {
       name: "safefy_payment_get_balance",
       title: "Get Merchant Balance",
-      description: "Consulta e retorna o saldo atual. Chame imediatamente quando o usuario perguntar 'qual meu saldo', 'quanto tenho disponivel', etc.",
+      description:
+        "Consulta e retorna o saldo atual. Chame imediatamente quando o usuario perguntar 'qual meu saldo', 'quanto tenho disponivel', etc. balance.settlementGroups lista o disponivel por grupo de liquidacao (cada grupo e sacado separadamente) e balance.availableTotal soma todos os grupos.",
       inputSchema: z.object({}).strict(),
       readOnlyHint: true,
       idempotentHint: true,
@@ -404,6 +405,13 @@ export function registerTools(server: McpServer, apiClient: SafefyPaymentApiClie
             .describe("true somente depois que o usuario confirmou valor e conta de destino nesta conversa."),
           externalId: z.string().max(100).optional(),
           callbackUrl: z.string().url().optional(),
+          settlementGroupId: z
+            .string()
+            .uuid()
+            .optional()
+            .describe(
+              "Opcional. Grupo de liquidacao de onde o saque sai: um id de balance.settlementGroups vindo de safefy_payment_get_balance chamado logo antes. O id e temporario: nunca reutilize um id antigo nem use 'Grupo 1' como id. Sem o campo, o grupo e escolhido automaticamente.",
+            ),
         })
         .strict(),
       destructiveHint: true,
