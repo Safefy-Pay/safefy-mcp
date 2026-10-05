@@ -178,6 +178,11 @@ Exemplo:
 
 ## Novidades
 
+### 1.2.0
+
+- Saque com conta de saque cadastrada voltou a funcionar (a API pública passou a aceitar `payoutAccountId`).
+- `settlementGroupId` opcional no saque, para escolher o grupo de liquidação. O saldo mostra o disponível por grupo em `balance.settlementGroups`.
+
 ### 1.1.0
 
 - O token de acesso só é enviado para a API da Safefy.
